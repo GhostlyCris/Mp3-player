@@ -5,146 +5,210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-        body {
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
-            background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
-        }
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .title {
-            text-align: right;
-            font-size: 3rem;
-            font-weight: 700;
-            color: #f7a8e7;
-            margin-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        .subtitle {
-            text-align: right;
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        .drop-area {
-            border: 2px dashed #fff;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.05);
-            padding: 48px 0;
-            text-align: center;
-            margin-bottom: 32px;
-            position: relative;
-            transition: background 0.2s;
-        }
-        .drop-area.dragover {
-            background: rgba(255,255,255,0.15);
-        }
-        .drop-icon {
-            font-size: 2.5rem;
-            color: #ffb6e6;
-            margin-bottom: 1rem;
-        }
-        .drop-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .drop-desc {
-            color: #eee;
-            font-size: 1rem;
-        }
-        .main-panels {
-            display: flex;
-            gap: 32px;
-            margin-top: 16px;
-        }
-        .panel {
-            flex: 1;
-            background: rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 32px 24px;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .panel-title {
-            font-weight: 700;
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            width: 100%;
-            text-align: left;
-        }
-        .panel .music-icon {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 1rem;
-        }
-        .panel .panel-message {
-            color: #fff;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        .playlist-list {
-            width: 100%;
-            margin-top: 1rem;
-        }
-        .playlist-item {
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            background: rgba(255,255,255,0.05);
-            transition: background 0.2s;
-        }
-        .playlist-item.active {
-            background: #f7a8e7;
-            color: #7b2ff2;
-            font-weight: bold;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            margin-top: 32px;
-        }
-        .controls button {
-            background: #fff;
-            color: #7b2ff2;
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-        .controls button:hover {
-            background: #f7a8e7;
-            color: #fff;
-        }
-        #volumeSlider {
-            width: 100px;
-        }
-        @media (max-width: 900px) {
-            .main-panels {
-                flex-direction: column;
-            }
-        }
-    </style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #f472b6, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+.subtitle {
+    text-align: center;
+    color: #e9d5ff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.drop-area {
+    border: 2px dashed #c084fc;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.05);
+    padding: 48px 0;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    transition: background 0.2s;
+}
+.drop-area.dragover {
+    background: rgba(255,255,255,0.15);
+}
+.drop-icon {
+    font-size: 2.5rem;
+    color: #f472b6;
+    margin-bottom: 1rem;
+}
+.drop-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+}
+.drop-desc {
+    color: #eee;
+    font-size: 1rem;
+}
+.main-panels {
+    display: flex;
+    gap: 32px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+.panel {
+    flex: 1;
+    background: rgba(255,255,255,0.10);
+    border-radius: 1rem;
+    padding: 32px 24px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.panel-title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+}
+.music-icon {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.panel-message {
+    color: #e9d5ff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.playlist-list {
+    width: 100%;
+    margin-top: 1rem;
+}
+.playlist-item {
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+.playlist-item.active {
+    background: #f7a8e7;
+    color: #7b2ff2;
+    font-weight: bold;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+.controls button {
+    background: #fff;
+    color: #7b2ff2;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.08);
+}
+.controls button:hover {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+}
+#volumeSlider {
+    width: 100px;
+    accent-color: #f472b6;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+input[type="range"]::-webkit-slider-track {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+}
+input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+input[type="range"]::-moz-range-track {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+}
+input[type="range"] {
+    background: transparent;
+    cursor: pointer;
+}
+@media (max-width: 900px) {
+    .main-panels {
+        flex-direction: column;
+    }
+}
+</style>
 </head>
 <body>
     <div class="container">
         <h1>Music Player</h1>
-        
+        <!-- Drop area -->
+        <div class="drop-area" id="dropArea">
+            <div class="drop-icon">🎵</div>
+            <div class="drop-title">Drop your music files here</div>
+            <div class="drop-desc">or click to browse</div>
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" multiple style="opacity:0;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;">
+        </div>
+        <div class="main-panels">
+            <div class="panel">
+                <div class="panel-title">Playlist</div>
+                <div class="music-icon">📃</div>
+                <div class="panel-message">No tracks uploaded yet</div>
+                <div class="playlist-list" id="trackList"></div>
+            </div>
+            <div class="panel">
+                <div class="panel-title">Now Playing</div>
+                <div class="music-icon">🎶</div>
+                <div class="panel-message" id="nowPlaying">Select a track to start playing</div>
+                <div class="album-art" id="albumArt"></div>
+            </div>
+        </div>
         <!-- Track list area -->
         <div class="track-list" id="trackList"></div>
 
@@ -159,7 +223,7 @@
             <button id="skipBtn">⏩</button>
             <button id="nextBtn">⏭️</button>
             <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
-            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" multiple>
+           
         </div>
     </div>
 
@@ -170,11 +234,13 @@
         let playlist = [];
         let currentIndex = 0;
         function handleFileSelect(e) {
-    playlist = Array.from(e.target.files);
-    if (playlist.length > 0) {
-        currentIndex = 0;
-        playSong(currentIndex);
-    }
+            playlist = Array.from(e.target.files);
+            if (playlist.length > 0) {
+                currentIndex = 0;
+                playSong(currentIndex);
+            }else {
+                updatePlaylistUI();
+            }
 }
 function playSong(index) {
     const file = playlist[index];
@@ -189,13 +255,32 @@ function playSong(index) {
             sourceNode = audioContext.createMediaElementSource(sourceElement);
             sourceNode.connect(audioContext.destination);
         }
+          updatePlaylistUI();
+        document.getElementById('nowPlaying').textContent = file.name;
     }
 }
    
-    
-        // Event listeners for play/pause, volume, and seek
+    function updatePlaylistUI() {
+    const trackList = document.getElementById('trackList');
+    trackList.innerHTML = '';
+    if (playlist.length === 0) {
+        trackList.innerHTML = '<div class="panel-message">No tracks uploaded yet</div>';
+        return;
+    }playlist.forEach((file, idx) => {
+        const div = document.createElement('div');
+        div.className = 'playlist-item' + (idx === currentIndex ? ' active' : '');
+        div.textContent = file.name;
+        div.addEventListener('click', () => {
+            currentIndex = idx;
+            playSong(currentIndex);
+            updatePlaylistUI();
+        });
+        trackList.appendChild(div);
+    });
+    }
+        
        
-       
+       // Event listeners for play/pause, volume, and seek
         
         function play() {
            sourceElement.play();
@@ -258,6 +343,26 @@ document.getElementById('prevBtn').addEventListener('click', function() {
         playSong(currentIndex);
     }
 });
+
+const dropArea = document.getElementById('dropArea');
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('dragover');
+});
+dropArea.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragover');
+});
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragover');
+    document.getElementById('fileInput').files = e.dataTransfer.files;
+    document.getElementById('fileInput').dispatchEvent(new Event('change'));
+});
+dropArea.addEventListener('click', () => {
+    document.getElementById('fileInput').click();
+});
+
         </script>
 </body>
 </html>
