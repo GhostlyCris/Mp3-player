@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Music Player</h1>
+        <!-- Drop area -->
+        <div class="drop-area" id="dropArea">
+            <div class="drop-icon">🎵</div>
+            <div class="drop-title">Drop your music files here</div>
+            <div class="drop-desc">or click to browse</div>
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" multiple style="opacity:0;position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;">
+        </div>
+        <div class="main-panels">
+            <div class="panel">
+                <div class="panel-title">Playlist</div>
+                <div class="music-icon">📃</div>
+                <div class="panel-message">No tracks uploaded yet</div>
+                <div class="playlist-list" id="trackList"></div>
+            </div>
+            <div class="panel">
+                <div class="panel-title">Now Playing</div>
+                <div class="music-icon">🎶</div>
+                <div class="panel-message" id="nowPlaying">Select a track to start playing</div>
+                <div class="album-art" id="albumArt"></div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <div class="controls">
+            <button id="prevBtn">⏮️</button>
+            <button id="rewindBtn">⏪</button>
+            <button id="playPauseBtn">▶</button>
+            <button id="skipBtn">⏩</button>
+            <button id="nextBtn">⏭️</button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

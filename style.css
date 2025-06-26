@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #f472b6, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+.subtitle {
+    text-align: center;
+    color: #e9d5ff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.drop-area {
+    border: 2px dashed #c084fc;
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.05);
+    padding: 48px 0;
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    transition: background 0.2s;
+}
+.drop-area.dragover {
+    background: rgba(255,255,255,0.15);
+}
+.drop-icon {
+    font-size: 2.5rem;
+    color: #f472b6;
+    margin-bottom: 1rem;
+}
+.drop-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+}
+.drop-desc {
+    color: #eee;
+    font-size: 1rem;
+}
+.main-panels {
+    display: flex;
+    gap: 32px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+.panel {
+    flex: 1;
+    background: rgba(255,255,255,0.10);
+    border-radius: 1rem;
+    padding: 32px 24px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.panel-title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    text-align: left;
+}
+.music-icon {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.panel-message {
+    color: #e9d5ff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+.playlist-list {
+    width: 100%;
+    margin-top: 1rem;
+}
+.playlist-item {
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+.playlist-item.active {
+    background: #f7a8e7;
+    color: #7b2ff2;
+    font-weight: bold;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+.controls button {
+    background: #fff;
+    color: #7b2ff2;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.08);
+}
+.controls button:hover {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    color: #fff;
+    transform: translateY(-2px) scale(1.05);
+}
+#volumeSlider {
+    width: 100px;
+    accent-color: #f472b6;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+input[type="range"]::-webkit-slider-track {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+}
+input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+input[type="range"]::-moz-range-track {
+    background: rgba(255,255,255,0.2);
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+}
+input[type="range"] {
+    background: transparent;
+    cursor: pointer;
+}
+@media (max-width: 900px) {
+    .main-panels {
+        flex-direction: column;
+    }
+}
