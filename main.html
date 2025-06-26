@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+   <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #7b2ff2 0%, #f357a8 100%);
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .title {
+            text-align: right;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f7a8e7;
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        .subtitle {
+            text-align: right;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .drop-area {
+            border: 2px dashed #fff;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.05);
+            padding: 48px 0;
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+            transition: background 0.2s;
+        }
+        .drop-area.dragover {
+            background: rgba(255,255,255,0.15);
+        }
+        .drop-icon {
+            font-size: 2.5rem;
+            color: #ffb6e6;
+            margin-bottom: 1rem;
+        }
+        .drop-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .drop-desc {
+            color: #eee;
+            font-size: 1rem;
+        }
+        .main-panels {
+            display: flex;
+            gap: 32px;
+            margin-top: 16px;
+        }
+        .panel {
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 32px 24px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .panel-title {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            text-align: left;
+        }
+        .panel .music-icon {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .panel .panel-message {
+            color: #fff;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .playlist-list {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .playlist-item {
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.05);
+            transition: background 0.2s;
+        }
+        .playlist-item.active {
+            background: #f7a8e7;
+            color: #7b2ff2;
+            font-weight: bold;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .controls button {
+            background: #fff;
+            color: #7b2ff2;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .controls button:hover {
+            background: #f7a8e7;
+            color: #fff;
+        }
+        #volumeSlider {
+            width: 100px;
+        }
+        @media (max-width: 900px) {
+            .main-panels {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Music Player</h1>
+        
+        <!-- Track list area -->
+        <div class="track-list" id="trackList"></div>
+
+        <!-- Album art area -->
+        <div class="album-art" id="albumArt"></div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="prevBtn">⏮️</button>
+            <button id="rewindBtn">⏪</button>
+            <button id="playPauseBtn">▶</button>
+            <button id="skipBtn">⏩</button>
+            <button id="nextBtn">⏭️</button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+            <input type="file" id="fileInput" accept=".mp3,.wav,.ogg" multiple>
+        </div>
+    </div>
+
+    <script>
+        let audioContext;
+        let sourceElement = new Audio();
+        let sourceNode;
+        let playlist = [];
+        let currentIndex = 0;
+        function handleFileSelect(e) {
+    playlist = Array.from(e.target.files);
+    if (playlist.length > 0) {
+        currentIndex = 0;
+        playSong(currentIndex);
+    }
+}
+function playSong(index) {
+    const file = playlist[index];
+    if (file) {
+        const url = URL.createObjectURL(file);
+        sourceElement.src = url;
+        sourceElement.load();
+        sourceElement.play();
+        document.getElementById('playPauseBtn').textContent = '⏸';
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            sourceNode = audioContext.createMediaElementSource(sourceElement);
+            sourceNode.connect(audioContext.destination);
+        }
+    }
+}
+   
+    
+        // Event listeners for play/pause, volume, and seek
+       
+       
+        
+        function play() {
+           sourceElement.play();
+            document.getElementById('playPauseBtn').textContent = '⏸';
+        }
+
+        function pause() {
+            sourceElement.pause();
+            document.getElementById('playPauseBtn').textContent = '▶';
+        }
+
+       function skip(seconds) {
+           if (sourceElement.currentTime !== undefined) {
+               sourceElement.currentTime = Math.min(sourceElement.duration, sourceElement.currentTime + seconds);
+           }
+        }
+
+
+
+function rewind(seconds) {
+    if (sourceElement.currentTime !== undefined) {
+        sourceElement.currentTime = Math.max(0, sourceElement.currentTime - seconds);
+    }
+}
+// Volume control
+document.getElementById('volumeSlider').addEventListener('input', function(e) {
+    sourceElement.volume = parseFloat(e.target.value);
+});
+
+        // Attach event listeners to other elements as needed...
+    
+
+        document.getElementById('playPauseBtn').addEventListener('click', function() {
+            if (sourceElement.paused) {
+        play();
+    } else {
+        pause();
+    }
+        });
+
+        document.getElementById('rewindBtn').addEventListener('click', function() {
+        rewind(10); // rewinds 10 seconds
+        });
+
+        document.getElementById('skipBtn').addEventListener('click', function() {
+            skip(10); // skips forward 10 seconds
+        });
+        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+    if (playlist.length > 0) {
+        currentIndex = (currentIndex + 1) % playlist.length;
+        playSong(currentIndex);
+    }
+});
+
+document.getElementById('prevBtn').addEventListener('click', function() {
+    if (playlist.length > 0) {
+        currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+        playSong(currentIndex);
+    }
+});
+        </script>
+</body>
+</html>
